@@ -5,32 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb756fc3-29db-4d73-b9b5-6b7509118b9c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/unit.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functional.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/functional.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/line-parser.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/line-parser.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bondage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/bondage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/convert-yarn-to-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/convert-yarn-to-js.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/default-variable-storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/default-variable-storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/lexer-state.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/lexer-state.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/lexer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/lexer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/states.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/states.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/tokens.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/tokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/line-parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/line-parser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/compiled-parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/compiled-parser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/nodes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/nodes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/parser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/results.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/results.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/yarn-bound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/yarn-bound.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/lexer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/lexer.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/parser.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/runner.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/runner.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unit.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/runner.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/runner.test.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1673040768366</updated>
       <workItem from="1673040769508" duration="1386000" />
-      <workItem from="1673042329556" duration="674000" />
+      <workItem from="1673042329556" duration="1163000" />
     </task>
     <servers />
   </component>
