@@ -1,8 +1,9 @@
+// @ts-nocheck
 /* eslint-env jest */
 
-import YarnBound from './src/index'
-import bondage from './src/bondage'
-const { OptionsResult } = bondage
+import bondage from '../src/bondage';
+import YarnBound from '../src/index';
+const { OptionsResult } = bondage;
 
 describe('functional test', () => {
   const dialogue = `
@@ -20,28 +21,28 @@ describe('functional test', () => {
     <<stop>>
     I should be ignored
     ===
-  `
+  `;
 
   test('should load a dialogue object into the runner', () => {
-    const runner = new YarnBound({ dialogue })
-    expect(runner.currentResult.text).toBe('\\I am a line')
-    runner.advance()
-    expect(runner.currentResult.text).toBe('1 + 1 is 2')
-    runner.advance()
+    const runner = new YarnBound({ dialogue });
+    expect(runner.currentResult.text).toBe('\\I am a line');
+    runner.advance();
+    expect(runner.currentResult.text).toBe('1 + 1 is 2');
+    runner.advance();
     expect(runner.currentResult.options).toEqual(
       new OptionsResult([
         { text: 'I should be disabled', isAvailable: false },
         { text: 'I am a choice' },
-        { text: 'I am another choice' }
-      ]).options.map((option) => ({ ...option, markup: [] }))
-    )
-    runner.advance(1)
-    expect(runner.currentResult.text).toBe('I am the line after a choice')
-    runner.advance()
-    expect(runner.currentResult.text).toBe('I am the line after the choices')
-    expect(runner.currentResult.isDialogueEnd).toBe(true)
-  })
-})
+        { text: 'I am another choice' },
+      ]).options.map((option) => ({ ...option, markup: [] })),
+    );
+    runner.advance(1);
+    expect(runner.currentResult.text).toBe('I am the line after a choice');
+    runner.advance();
+    expect(runner.currentResult.text).toBe('I am the line after the choices');
+    expect(runner.currentResult.isDialogueEnd).toBe(true);
+  });
+});
 
 describe('supports indented blocks', () => {
   const dialogue = `
@@ -61,23 +62,20 @@ describe('supports indented blocks', () => {
       I remember you... You love [special]{$favoriteFood}[/special] right?
     <<endif>>
     ===
-  `
+  `;
 
   test('should load a dialogue object into the runner', () => {
-    const runner = new YarnBound({ dialogue })
-    expect(runner.currentResult.text).toBe('Hi, What is your favorite food?')
-    runner.advance()
+    const runner = new YarnBound({ dialogue });
+    expect(runner.currentResult.text).toBe('Hi, What is your favorite food?');
+    runner.advance();
 
     expect(runner.currentResult.options).toEqual(
-      new OptionsResult([
-        { text: 'Tacos' },
-        { text: 'Spam' },
-      ]).options.map((option) => ({ ...option, markup: [] }))
-    )
-    runner.advance(1)
-    expect(runner.currentResult.text).toBe('Interesting... Noting it down.')
-    runner.advance()
-    expect(runner.currentResult.text).toBe('Charles learned that you love spam!')
-    expect(runner.currentResult.isDialogueEnd).toBe(true)
-  })
-})
+      new OptionsResult([{ text: 'Tacos' }, { text: 'Spam' }]).options.map((option) => ({ ...option, markup: [] })),
+    );
+    runner.advance(1);
+    expect(runner.currentResult.text).toBe('Interesting... Noting it down.');
+    runner.advance();
+    expect(runner.currentResult.text).toBe('Charles learned that you love spam!');
+    expect(runner.currentResult.isDialogueEnd).toBe(true);
+  });
+});

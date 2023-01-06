@@ -1,8 +1,9 @@
+// @ts-nocheck
+import convertYarn from './convert-yarn-to-js';
+import DefaultVariableStorage from './default-variable-storage';
+import types from './parser/nodes';
 import parser from './parser/parser';
 import results from './results';
-import DefaultVariableStorage from './default-variable-storage';
-import convertYarn from './convert-yarn-to-js';
-import types from './parser/nodes';
 
 const nodeTypes = types.types;
 
@@ -82,26 +83,23 @@ class Runner {
 
     const declareLines = allLines.reduce((acc, line) => {
       const match = line.match(/^<<declare .+>>/);
-      return match
-        ? [...acc, line]
-        : acc;
+      return match ? [...acc, line] : acc;
     }, []);
     if (declareLines.length) {
       parser.parse(declareLines.join('\n'));
     }
 
-    Object.entries(parser.yy.declarations)
-      .forEach(([variableName, { expression, explicitType }]) => {
-        const value = this.evaluateExpressionOrLiteral(expression);
+    Object.entries(parser.yy.declarations).forEach(([variableName, { expression, explicitType }]) => {
+      const value = this.evaluateExpressionOrLiteral(expression);
 
-        if (explicitType && typeof value !== typeof exampleValues[explicitType]) {
-          throw new Error(`Cannot declare value ${value} as type ${explicitType} for variable ${variableName}`);
-        }
+      if (explicitType && typeof value !== typeof exampleValues[explicitType]) {
+        throw new Error(`Cannot declare value ${value} as type ${explicitType} for variable ${variableName}`);
+      }
 
-        if (!this.variables.get(variableName)) {
-          this.variables.set(variableName, value);
-        }
-      });
+      if (!this.variables.get(variableName)) {
+        this.variables.set(variableName, value);
+      }
+    });
   }
 
   registerFunction(name, func) {
@@ -116,7 +114,7 @@ class Runner {
    * Generator to return each sequential dialog result starting from the given node
    * @param {string} [startNode] - The name of the yarn node to begin at
    */
-  * run(startNode) {
+  *run(startNode) {
     let jumpTo = startNode;
     while (jumpTo) {
       const yarnNode = this.yarnNodes[jumpTo];
@@ -139,7 +137,7 @@ class Runner {
    * @param {Node[]} nodes
    * @param {YarnNode[]} metadata
    */
-  * evalNodes(nodes, metadata) {
+  *evalNodes(nodes, metadata) {
     let shortcutNodes = [];
     let textRun = '';
 
@@ -154,18 +152,12 @@ class Runner {
 
       // Text and the output of Inline Expressions
       // are combined to deliver a TextNode.
-      if (
-        node instanceof nodeTypes.Text
-        || node instanceof nodeTypes.Expression
-      ) {
+      if (node instanceof nodeTypes.Text || node instanceof nodeTypes.Expression) {
         textRun += this.evaluateExpressionOrLiteral(node).toString();
         if (
-          nextNode
-          && node.lineNum === nextNode.lineNum
-          && (
-            nextNode instanceof nodeTypes.Text
-            || nextNode instanceof nodeTypes.Expression
-          )
+          nextNode &&
+          node.lineNum === nextNode.lineNum &&
+          (nextNode instanceof nodeTypes.Text || nextNode instanceof nodeTypes.Expression)
         ) {
           // Same line, with another text equivalent to add to the
           // text run further on in the loop, so don't yield.
@@ -217,17 +209,14 @@ class Runner {
    * yield a shortcut result then handle the subsequent selection
    * @param {any[]} selections
    */
-  * handleShortcuts(selections, metadata) {
+  *handleShortcuts(selections, metadata) {
     // Multiple options to choose from (or just a single shortcut)
     // Tag any conditional dialog options that result to false,
     // the consuming app does the actual filtering or whatever
     const transformedSelections = selections.map((s) => {
       let isAvailable = true;
 
-      if (
-        s.conditionalExpression
-        && !this.evaluateExpressionOrLiteral(s.conditionalExpression)
-      ) {
+      if (s.conditionalExpression && !this.evaluateExpressionOrLiteral(s.conditionalExpression)) {
         isAvailable = false;
       }
 
@@ -257,7 +246,11 @@ class Runner {
     const result = this.evaluateExpressionOrLiteral(node.expression);
     const oldValue = this.variables.get(node.variableName);
     if (oldValue && typeof oldValue !== typeof result) {
-      throw new Error(`Variable ${node.variableName} is already type ${typeof oldValue}; cannot set equal to ${result} of type ${typeof result}`);
+      throw new Error(
+        `Variable ${
+          node.variableName
+        } is already type ${typeof oldValue}; cannot set equal to ${result} of type ${typeof result}`,
+      );
     }
     this.variables.set(node.variableName, result);
   }
@@ -289,9 +282,7 @@ class Runner {
 
   evaluateFunctionCall(node) {
     if (this.functions[node.functionName]) {
-      return this.functions[node.functionName](
-        ...node.args.map(this.evaluateExpressionOrLiteral, this),
-      );
+      return this.functions[node.functionName](...node.args.map(this.evaluateExpressionOrLiteral, this));
     }
     throw new Error(`Function "${node.functionName}" not found`);
   }
@@ -309,31 +300,81 @@ class Runner {
     }
 
     const nodeHandlers = {
-      UnaryMinusExpressionNode: (a) => { return -a; },
-      ArithmeticExpressionAddNode: (a, b) => { return a + b; },
-      ArithmeticExpressionMinusNode: (a, b) => { return a - b; },
-      ArithmeticExpressionExponentNode: (a, b) => { return a ** b; },
-      ArithmeticExpressionMultiplyNode: (a, b) => { return a * b; },
-      ArithmeticExpressionDivideNode: (a, b) => { return a / b; },
-      ArithmeticExpressionModuloNode: (a, b) => { return a % b; },
-      NegatedBooleanExpressionNode: (a) => { return !a; },
-      BooleanOrExpressionNode: (a, b) => { return a || b; },
-      BooleanAndExpressionNode: (a, b) => { return a && b; },
-      BooleanXorExpressionNode: (a, b) => { return !!(a ^ b); }, // eslint-disable-line no-bitwise
-      EqualToExpressionNode: (a, b) => { return a === b; },
-      NotEqualToExpressionNode: (a, b) => { return a !== b; },
-      GreaterThanExpressionNode: (a, b) => { return a > b; },
-      GreaterThanOrEqualToExpressionNode: (a, b) => { return a >= b; },
-      LessThanExpressionNode: (a, b) => { return a < b; },
-      LessThanOrEqualToExpressionNode: (a, b) => { return a <= b; },
-      TextNode: (a) => { return a.text; },
-      EscapedCharacterNode: (a) => { return this.noEscape ? a.text : a.text.slice(1); },
-      NumericLiteralNode: (a) => { return parseFloat(a.numericLiteral); },
-      StringLiteralNode: (a) => { return `${a.stringLiteral}`; },
-      BooleanLiteralNode: (a) => { return a.booleanLiteral === 'true'; },
-      VariableNode: (a) => { return this.variables.get(a.variableName); },
-      FunctionCallNode: (a) => { return this.evaluateFunctionCall(a); },
-      InlineExpressionNode: (a) => { return a; },
+      UnaryMinusExpressionNode: (a) => {
+        return -a;
+      },
+      ArithmeticExpressionAddNode: (a, b) => {
+        return a + b;
+      },
+      ArithmeticExpressionMinusNode: (a, b) => {
+        return a - b;
+      },
+      ArithmeticExpressionExponentNode: (a, b) => {
+        return a ** b;
+      },
+      ArithmeticExpressionMultiplyNode: (a, b) => {
+        return a * b;
+      },
+      ArithmeticExpressionDivideNode: (a, b) => {
+        return a / b;
+      },
+      ArithmeticExpressionModuloNode: (a, b) => {
+        return a % b;
+      },
+      NegatedBooleanExpressionNode: (a) => {
+        return !a;
+      },
+      BooleanOrExpressionNode: (a, b) => {
+        return a || b;
+      },
+      BooleanAndExpressionNode: (a, b) => {
+        return a && b;
+      },
+      BooleanXorExpressionNode: (a, b) => {
+        return !!(a ^ b);
+      }, // eslint-disable-line no-bitwise
+      EqualToExpressionNode: (a, b) => {
+        return a === b;
+      },
+      NotEqualToExpressionNode: (a, b) => {
+        return a !== b;
+      },
+      GreaterThanExpressionNode: (a, b) => {
+        return a > b;
+      },
+      GreaterThanOrEqualToExpressionNode: (a, b) => {
+        return a >= b;
+      },
+      LessThanExpressionNode: (a, b) => {
+        return a < b;
+      },
+      LessThanOrEqualToExpressionNode: (a, b) => {
+        return a <= b;
+      },
+      TextNode: (a) => {
+        return a.text;
+      },
+      EscapedCharacterNode: (a) => {
+        return this.noEscape ? a.text : a.text.slice(1);
+      },
+      NumericLiteralNode: (a) => {
+        return parseFloat(a.numericLiteral);
+      },
+      StringLiteralNode: (a) => {
+        return `${a.stringLiteral}`;
+      },
+      BooleanLiteralNode: (a) => {
+        return a.booleanLiteral === 'true';
+      },
+      VariableNode: (a) => {
+        return this.variables.get(a.variableName);
+      },
+      FunctionCallNode: (a) => {
+        return this.evaluateFunctionCall(a);
+      },
+      InlineExpressionNode: (a) => {
+        return a;
+      },
     };
 
     const handler = nodeHandlers[node.type];
@@ -345,9 +386,7 @@ class Runner {
       node instanceof nodeTypes.Expression
         ? this.evaluateExpressionOrLiteral(node.expression || node.expression1)
         : node,
-      node.expression2
-        ? this.evaluateExpressionOrLiteral(node.expression2)
-        : node,
+      node.expression2 ? this.evaluateExpressionOrLiteral(node.expression2) : node,
     );
   }
 }

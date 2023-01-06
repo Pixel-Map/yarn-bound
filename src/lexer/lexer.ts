@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use strict';
 
 // Syncs with YarnSpinner@e0f6807,
@@ -73,7 +74,9 @@ class Lexer {
       // Now that we're at the end of the text, we'll emit as many
       // `Dedent` as necessary, to get back to 0-indentation.
       const indent = this.indentation.pop();
-      if (indent && indent[1]) { return 'Dedent'; }
+      if (indent && indent[1]) {
+        return 'Dedent';
+      }
 
       return 'EndOfInput';
     }
@@ -104,8 +107,7 @@ class Lexer {
   lexNextTokenOnCurrentLine() {
     const thisIndentation = this.getCurrentLineIndentation();
 
-    if (this.shouldTrackNextIndentation &&
-      thisIndentation > this.previousLevelOfIndentation) {
+    if (this.shouldTrackNextIndentation && thisIndentation > this.previousLevelOfIndentation) {
       this.indentation.push([thisIndentation, true]);
       this.shouldTrackNextIndentation = false;
 
@@ -166,16 +168,21 @@ class Lexer {
         }
 
         const nextState = this.states[rule.state];
-        const nextStateHasText = !rule.state || nextState.transitions
-          .find((transition) => { return transition.token === 'Text'; });
+        const nextStateHasText =
+          !rule.state ||
+          nextState.transitions.find((transition) => {
+            return transition.token === 'Text';
+          });
         // inline expressions and escaped characters interrupt text
         // but should still preserve surrounding whitespace.
         if (
-          (rule.token !== 'EndInlineExp' && rule.token !== 'EscapedCharacter')
-          || !nextStateHasText // we never want leading whitespace if not in text-supporting state
+          (rule.token !== 'EndInlineExp' && rule.token !== 'EscapedCharacter') ||
+          !nextStateHasText // we never want leading whitespace if not in text-supporting state
         ) {
           // Remove leading whitespace characters
-          const spaceMatch = this.getCurrentLine().substring(this.yylloc.last_column - 1).match(/^\s*/);
+          const spaceMatch = this.getCurrentLine()
+            .substring(this.yylloc.last_column - 1)
+            .match(/^\s*/);
           if (spaceMatch[0]) {
             this.yylloc.last_column += spaceMatch[0].length;
           }
@@ -213,7 +220,10 @@ class Lexer {
    */
   setInput(text) {
     // Delete carriage return while keeping a similar semantic.
-    this.originalText = text.replace(/(\r\n)/g, '\n').replace(/\r/g, '\n').replace(/[\n\r]+$/, '');
+    this.originalText = text
+      .replace(/(\r\n)/g, '\n')
+      .replace(/\r/g, '\n')
+      .replace(/[\n\r]+$/, '');
     // Transform the input into an array of lines.
     this.lines = this.originalText.split('\n');
     this.reset();
@@ -251,8 +261,7 @@ class Lexer {
    * @return {boolean}  `true` when yylloc indicates that the end was reached.
    */
   isAtTheEndOfText() {
-    return this.isAtTheEndOfLine() &&
-      this.yylloc.first_line >= this.lines.length;
+    return this.isAtTheEndOfLine() && this.yylloc.first_line >= this.lines.length;
   }
 
   /**

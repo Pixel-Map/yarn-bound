@@ -5,19 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb756fc3-29db-4d73-b9b5-6b7509118b9c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/release.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/release.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/unit.test.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.projen/deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/.projen/deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.projen/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/.projen/tasks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.projenrc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.projenrc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/.projenrc.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.dev.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functional.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/functional.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/line-parser.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/line-parser.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bondage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/bondage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/convert-yarn-to-js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/convert-yarn-to-js.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/default-variable-storage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/default-variable-storage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/lexer-state.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/lexer-state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/lexer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/lexer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/states.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/states.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/tokens.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/tokens.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/line-parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/line-parser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/compiled-parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/compiled-parser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/nodes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/nodes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/parser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/parser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/results.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/results.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runner.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/yarn-bound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/yarn-bound.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/lexer.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/lexer.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/parser.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/parser.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/runner.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/runner.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unit.test.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +44,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2JyC7WlFvlZQMbwM3P3Vho7KNqv" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,11 +65,16 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/kendog/Documents/yarn-bound/node_modules/prettier",
-    "settings.editor.selected.configurable": "MTConfigurable",
+    "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "/Users/kendog/Documents/yarn-bound/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -62,17 +83,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1673040768366</updated>
-      <workItem from="1673040769508" duration="1103000" />
+      <workItem from="1673040769508" duration="1386000" />
+      <workItem from="1673042329556" duration="674000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/.projenrc.js" />
-        <option value="$PROJECT_DIR$/.projenrc.js" />
-      </list>
-    </option>
   </component>
 </project>

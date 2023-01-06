@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use strict';
 
 import LexerState from './lexer-state';
@@ -38,8 +39,7 @@ function makeStates() {
       .addTransition('EndCommand', 'base', true)
       .addTextRule('Text'),
 
-    commandArg: new LexerState()
-      .addTextRule('Text'),
+    commandArg: new LexerState().addTextRule('Text'),
 
     commandParenArgOrExpression: new LexerState()
       .addTransition('EndCommand', 'base', true)
@@ -52,9 +52,7 @@ function makeStates() {
       .addTransition('Null')
       .addTransition('RightParen'),
 
-    assignment: new LexerState()
-      .addTransition('Variable')
-      .addTransition('EqualToOrAssign', 'expression'),
+    assignment: new LexerState().addTransition('Variable').addTransition('EqualToOrAssign', 'expression'),
 
     declare: new LexerState()
       .addTransition('Variable')
@@ -66,8 +64,7 @@ function makeStates() {
       .addTransition('BeginInlineExp', 'inlineExpressionInCommand', true)
       .addTransition('EndCommand', 'base', true),
 
-    stop: new LexerState()
-      .addTransition('EndCommand', 'base', true),
+    stop: new LexerState().addTransition('EndCommand', 'base', true),
 
     expression: new LexerState()
       .addTransition('As')

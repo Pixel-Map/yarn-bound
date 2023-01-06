@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable */
 /*
 Yoinked from YarnEditor source and modified to limit size and scope:
@@ -24,10 +25,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 export default function convertYarnToJS(content) {
   const objects = [];
 
-  const lines = content.split(/\r?\n+/)
-    .filter((line) => {
-      return !line.match(/^\s*$/);
-    });
+  const lines = content.split(/\r?\n+/).filter((line) => {
+    return !line.match(/^\s*$/);
+  });
 
   let obj = null;
   let readingBody = false;

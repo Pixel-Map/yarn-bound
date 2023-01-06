@@ -1,18 +1,17 @@
+// @ts-nocheck
 /* eslint no-unused-expressions: "off" */
 /* eslint-env jest */
 
 'use strict';
 
-import parser from '../src/parser/parser';
 import nodes from '../src/parser/nodes';
+import parser from '../src/parser/parser';
 
 describe('Parser', () => {
   it('can parse simple text', () => {
     const results = parser.parse('some text');
 
-    const expected = [
-      new nodes.TextNode('some text', { first_line: results[0].lineNum }),
-    ];
+    const expected = [new nodes.TextNode('some text', { first_line: results[0].lineNum })];
 
     expect(results).toEqual(expected);
   });
@@ -21,10 +20,9 @@ describe('Parser', () => {
     const results = parser.parse('<<commandtext>>');
 
     const expected = [
-      new nodes.GenericCommandNode(
-        [new nodes.TextNode('commandtext', { first_line: results[0].lineNum })],
-        { first_line: results[0].lineNum },
-      ),
+      new nodes.GenericCommandNode([new nodes.TextNode('commandtext', { first_line: results[0].lineNum })], {
+        first_line: results[0].lineNum,
+      }),
     ];
 
     expect(results).toEqual(expected);
@@ -48,10 +46,9 @@ describe('Parser', () => {
 
     const expected = [
       new nodes.TextNode('some text', { first_line: results[0].lineNum }),
-      new nodes.GenericCommandNode(
-        [new nodes.TextNode('commandtext', { first_line: results[1].lineNum })],
-        { first_line: results[1].lineNum },
-      ),
+      new nodes.GenericCommandNode([new nodes.TextNode('commandtext', { first_line: results[1].lineNum })], {
+        first_line: results[1].lineNum,
+      }),
     ];
 
     expect(results).toEqual(expected);
@@ -60,9 +57,7 @@ describe('Parser', () => {
   it('can parse a simple assignment', () => {
     const results = parser.parse('<<set $testvar = 5>>');
 
-    const expected = [
-      new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
-    ];
+    const expected = [new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5'))];
 
     expect(results).toEqual(expected);
   });
@@ -71,8 +66,10 @@ describe('Parser', () => {
     const results = parser.parse('<<set $testvar = visited(1)>>');
 
     const expected = [
-      new nodes.SetVariableEqualToNode('testvar',
-        new nodes.FunctionCallNode('visited', [new nodes.NumericLiteralNode('1')], { first_line: 1 })),
+      new nodes.SetVariableEqualToNode(
+        'testvar',
+        new nodes.FunctionCallNode('visited', [new nodes.NumericLiteralNode('1')], { first_line: 1 }),
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -82,10 +79,14 @@ describe('Parser', () => {
     const results = parser.parse('<<set $testvar = visited(1 + 2)>>');
 
     const expected = [
-      new nodes.SetVariableEqualToNode('testvar',
-        new nodes.FunctionCallNode('visited', [new nodes.ArithmeticExpressionAddNode(
-          new nodes.NumericLiteralNode('1'),
-          new nodes.NumericLiteralNode('2'))], { first_line: 1 })),
+      new nodes.SetVariableEqualToNode(
+        'testvar',
+        new nodes.FunctionCallNode(
+          'visited',
+          [new nodes.ArithmeticExpressionAddNode(new nodes.NumericLiteralNode('1'), new nodes.NumericLiteralNode('2'))],
+          { first_line: 1 },
+        ),
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -95,13 +96,14 @@ describe('Parser', () => {
     const results = parser.parse('<<set $testvar = visited((1 + 2))>>');
 
     const expected = [
-      new nodes.SetVariableEqualToNode('testvar',
-        new nodes.FunctionCallNode('visited', [
-          new nodes.ArithmeticExpressionAddNode(
-            new nodes.NumericLiteralNode('1'),
-            new nodes.NumericLiteralNode('2'),
-          ),
-        ], { first_line: 1 })),
+      new nodes.SetVariableEqualToNode(
+        'testvar',
+        new nodes.FunctionCallNode(
+          'visited',
+          [new nodes.ArithmeticExpressionAddNode(new nodes.NumericLiteralNode('1'), new nodes.NumericLiteralNode('2'))],
+          { first_line: 1 },
+        ),
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -139,14 +141,14 @@ describe('Parser', () => {
       new nodes.TextNode('text', { first_line: 1 }),
       new nodes.DialogShortcutNode(
         [new nodes.TextNode('shortcut1', { first_line: 2 })],
-        [
-          new nodes.TextNode('Text1', { first_line: 3 }),
-          new nodes.TextNode('Text1a', { first_line: 4 }),
-        ],
-        { first_line: 2 }),
+        [new nodes.TextNode('Text1', { first_line: 3 }), new nodes.TextNode('Text1a', { first_line: 4 })],
+        { first_line: 2 },
+      ),
       new nodes.DialogShortcutNode(
         [new nodes.TextNode('shortcut2', { first_line: 5 })],
-        [new nodes.TextNode('Text2', { first_line: 6 })], { first_line: 5 }),
+        [new nodes.TextNode('Text2', { first_line: 6 })],
+        { first_line: 5 },
+      ),
       new nodes.TextNode('more text', { first_line: 7 }),
     ];
 
@@ -154,7 +156,9 @@ describe('Parser', () => {
   });
 
   it('can parse nested shortcut commands', () => {
-    const results = parser.parse('text\n-> shortcut1\n\tText1\n\t-> nestedshortcut1\n\t\tNestedText1\n\t-> nestedshortcut2\n\t\tNestedText2\n-> shortcut2\n\tText2\nmore text');
+    const results = parser.parse(
+      'text\n-> shortcut1\n\tText1\n\t-> nestedshortcut1\n\t\tNestedText1\n\t-> nestedshortcut2\n\t\tNestedText2\n-> shortcut2\n\tText2\nmore text',
+    );
 
     const expected = [
       new nodes.TextNode('text', { first_line: 1 }),
@@ -164,9 +168,7 @@ describe('Parser', () => {
           new nodes.TextNode('Text1', { first_line: 3 }),
           new nodes.DialogShortcutNode(
             [new nodes.TextNode('nestedshortcut1', { first_line: 4 })],
-            [
-              new nodes.TextNode('NestedText1', { first_line: 5 }),
-            ],
+            [new nodes.TextNode('NestedText1', { first_line: 5 })],
             { first_line: 4 },
           ),
           new nodes.DialogShortcutNode(
@@ -174,10 +176,14 @@ describe('Parser', () => {
             [new nodes.TextNode('NestedText2', { first_line: 7 })],
             { first_line: 6 },
           ),
-        ], { first_line: 2 }),
+        ],
+        { first_line: 2 },
+      ),
       new nodes.DialogShortcutNode(
         [new nodes.TextNode('shortcut2', { first_line: 8 })],
-        [new nodes.TextNode('Text2', { first_line: 9 })], { first_line: 8 }),
+        [new nodes.TextNode('Text2', { first_line: 9 })],
+        { first_line: 8 },
+      ),
       new nodes.TextNode('more text', { first_line: 10 }),
     ];
 
@@ -185,7 +191,9 @@ describe('Parser', () => {
   });
 
   it('can parse a shortcut option containing an assignment', () => {
-    const results = parser.parse('<<set $testvar to 6>>\ntext\n-> shortcut1\n\tshortcut text1\n-> shortcut2\n\tshortcut text2\nmore text {$testvar}');
+    const results = parser.parse(
+      '<<set $testvar to 6>>\ntext\n-> shortcut1\n\tshortcut text1\n-> shortcut2\n\tshortcut text2\nmore text {$testvar}',
+    );
 
     const expected = [
       new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('6')),
@@ -212,10 +220,9 @@ describe('Parser', () => {
 
     const expected = [
       new nodes.TextNode('some text', { first_line: results[0].lineNum }),
-      new nodes.GenericCommandNode(
-        [new nodes.TextNode('commandtext', { first_line: results[1].lineNum })],
-        { first_line: results[1].lineNum },
-      ),
+      new nodes.GenericCommandNode([new nodes.TextNode('commandtext', { first_line: results[1].lineNum })], {
+        first_line: results[1].lineNum,
+      }),
     ];
 
     expect(results).toEqual(expected);
@@ -226,10 +233,9 @@ describe('Parser', () => {
 
     const expected = [
       new nodes.TextNode('some text', { first_line: results[0].lineNum }),
-      new nodes.GenericCommandNode(
-        [new nodes.TextNode('commandtext', { first_line: results[1].lineNum })],
-        { first_line: results[1].lineNum },
-      ),
+      new nodes.GenericCommandNode([new nodes.TextNode('commandtext', { first_line: results[1].lineNum })], {
+        first_line: results[1].lineNum,
+      }),
     ];
 
     expect(results).toEqual(expected);
@@ -322,10 +328,7 @@ describe('Parser', () => {
       new nodes.GenericCommandNode(
         [
           new nodes.TextNode('commandtext ', { first_line: results[0].lineNum }),
-          new nodes.InlineExpressionNode(
-            new nodes.VariableNode('testvar'),
-            { first_line: results[0].lineNum },
-          ),
+          new nodes.InlineExpressionNode(new nodes.VariableNode('testvar'), { first_line: results[0].lineNum }),
         ],
         { first_line: results[0].lineNum },
       ),
@@ -341,10 +344,12 @@ describe('Parser', () => {
     // Runner aggregates text and expression value for same line.
     const expected = [
       new nodes.TextNode('Hello there ', { first_line: results[0].lineNum }),
-      new nodes.InlineExpressionNode(new nodes.FunctionCallNode('testfunc', [
-        new nodes.NumericLiteralNode('1'),
-        new nodes.NumericLiteralNode('2'),
-      ], { first_line: results[0].lineNum }), { first_line: results[0].lineNum }),
+      new nodes.InlineExpressionNode(
+        new nodes.FunctionCallNode('testfunc', [new nodes.NumericLiteralNode('1'), new nodes.NumericLiteralNode('2')], {
+          first_line: results[0].lineNum,
+        }),
+        { first_line: results[0].lineNum },
+      ),
       new nodes.TextNode('.', { first_line: results[0].lineNum }),
     ];
 
@@ -358,10 +363,10 @@ describe('Parser', () => {
     // Runner aggregates text and expression value for same line.
     const expected = [
       new nodes.TextNode('Hello there ', { first_line: results[0].lineNum }),
-      new nodes.InlineExpressionNode(new nodes.ArithmeticExpressionAddNode(
-        new nodes.VariableNode('testvar'),
-        new nodes.NumericLiteralNode('1'))
-      , { first_line: results[0].lineNum }),
+      new nodes.InlineExpressionNode(
+        new nodes.ArithmeticExpressionAddNode(new nodes.VariableNode('testvar'), new nodes.NumericLiteralNode('1')),
+        { first_line: results[0].lineNum },
+      ),
       new nodes.TextNode(' test.', { first_line: results[0].lineNum }),
     ];
 
@@ -375,10 +380,9 @@ describe('Parser', () => {
     // Runner aggregates text and expression value for same line.
     const expected = [
       new nodes.IfNode(
-        new nodes.EqualToExpressionNode(
-          new nodes.VariableNode('testvar'),
-          new nodes.BooleanLiteralNode('true')),
-        [new nodes.TextNode('Hi', { first_line: 2 })]),
+        new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar'), new nodes.BooleanLiteralNode('true')),
+        [new nodes.TextNode('Hi', { first_line: 2 })],
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -391,12 +395,15 @@ describe('Parser', () => {
     // They should all be on the same line.
     // Runner aggregates text and expression value for same line.
     const expected = [
-      new nodes.IfNode(new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar')
-        , new nodes.BooleanLiteralNode('true'))
-      , [new nodes.IfNode(new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar2')
-        , new nodes.BooleanLiteralNode('false'))
-      , [new nodes.TextNode('Hi', { first_line: 3 })]),
-      ]),
+      new nodes.IfNode(
+        new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar'), new nodes.BooleanLiteralNode('true')),
+        [
+          new nodes.IfNode(
+            new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar2'), new nodes.BooleanLiteralNode('false')),
+            [new nodes.TextNode('Hi', { first_line: 3 })],
+          ),
+        ],
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -409,29 +416,37 @@ describe('Parser', () => {
     // Runner aggregates text and expression value for same line.
     const expected = [
       new nodes.IfNode(
-        new nodes.EqualToExpressionNode(
-          new nodes.VariableNode('testvar'),
-          new nodes.BooleanLiteralNode('true')),
-        [new nodes.TextNode('Hi', { first_line: 2 }),
-          new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5'))]),
+        new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar'), new nodes.BooleanLiteralNode('true')),
+        [
+          new nodes.TextNode('Hi', { first_line: 2 }),
+          new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
+        ],
+      ),
     ];
 
     expect(results).toEqual(expected);
   });
 
   it('can parse am assignment within nested If expression', () => {
-    const results = parser.parse('<<if $testvar == true>>\n<<if $testvar2 == false>>\nHi\n<<set $testvar to 5>>\n<<endif>>\n<<endif>>');
+    const results = parser.parse(
+      '<<if $testvar == true>>\n<<if $testvar2 == false>>\nHi\n<<set $testvar to 5>>\n<<endif>>\n<<endif>>',
+    );
 
     // They should all be on the same line.
     // Runner aggregates text and expression value for same line.
     const expected = [
-      new nodes.IfNode(new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar')
-        , new nodes.BooleanLiteralNode('true'))
-      , [new nodes.IfNode(new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar2')
-        , new nodes.BooleanLiteralNode('false'))
-      , [new nodes.TextNode('Hi', { first_line: 3 }),
-        new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5'))]),
-      ]),
+      new nodes.IfNode(
+        new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar'), new nodes.BooleanLiteralNode('true')),
+        [
+          new nodes.IfNode(
+            new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar2'), new nodes.BooleanLiteralNode('false')),
+            [
+              new nodes.TextNode('Hi', { first_line: 3 }),
+              new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
+            ],
+          ),
+        ],
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -445,14 +460,8 @@ describe('Parser', () => {
     const expected = [
       new nodes.IfNode(
         new nodes.BooleanOrExpressionNode(
-          new nodes.EqualToExpressionNode(
-            new nodes.VariableNode('testvar'),
-            new nodes.BooleanLiteralNode('true'),
-          ),
-          new nodes.EqualToExpressionNode(
-            new nodes.VariableNode('override'),
-            new nodes.BooleanLiteralNode('true'),
-          ),
+          new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar'), new nodes.BooleanLiteralNode('true')),
+          new nodes.EqualToExpressionNode(new nodes.VariableNode('override'), new nodes.BooleanLiteralNode('true')),
         ),
         [new nodes.TextNode('Hi', { first_line: 2 })],
       ),
@@ -470,19 +479,10 @@ describe('Parser', () => {
       new nodes.IfNode(
         new nodes.BooleanOrExpressionNode(
           new nodes.BooleanAndExpressionNode(
-            new nodes.EqualToExpressionNode(
-              new nodes.VariableNode('testvar'),
-              new nodes.BooleanLiteralNode('true'),
-            ),
-            new nodes.GreaterThanExpressionNode(
-              new nodes.VariableNode('testvar2'),
-              new nodes.NumericLiteralNode('1'),
-            ),
+            new nodes.EqualToExpressionNode(new nodes.VariableNode('testvar'), new nodes.BooleanLiteralNode('true')),
+            new nodes.GreaterThanExpressionNode(new nodes.VariableNode('testvar2'), new nodes.NumericLiteralNode('1')),
           ),
-          new nodes.EqualToExpressionNode(
-            new nodes.VariableNode('override'),
-            new nodes.BooleanLiteralNode('true'),
-          ),
+          new nodes.EqualToExpressionNode(new nodes.VariableNode('override'), new nodes.BooleanLiteralNode('true')),
         ),
         [new nodes.TextNode('Hi', { first_line: 2 })],
       ),
@@ -498,13 +498,12 @@ describe('Parser', () => {
     // Runner aggregates text and expression value for same line.
     const expected = [
       new nodes.IfNode(
-        new nodes.FunctionCallNode('visited', [
-          new nodes.StringLiteralNode('testnode'),
-        ], { first_line: 1 }),
+        new nodes.FunctionCallNode('visited', [new nodes.StringLiteralNode('testnode')], { first_line: 1 }),
         [
           new nodes.TextNode('Hi', { first_line: 2 }),
           new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
-        ]),
+        ],
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -518,14 +517,13 @@ describe('Parser', () => {
     const expected = [
       new nodes.IfNode(
         new nodes.NegatedBooleanExpressionNode(
-          new nodes.FunctionCallNode('visited', [
-            new nodes.StringLiteralNode('testnode'),
-          ], { first_line: 1 }),
+          new nodes.FunctionCallNode('visited', [new nodes.StringLiteralNode('testnode')], { first_line: 1 }),
         ),
         [
           new nodes.TextNode('Hi', { first_line: 2 }),
           new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
-        ]),
+        ],
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -537,12 +535,10 @@ describe('Parser', () => {
     // They should all be on the same line.
     // Runner aggregates text and expression value for same line.
     const expected = [
-      new nodes.IfNode(
-        new nodes.NegatedBooleanExpressionNode(new nodes.BooleanLiteralNode('true')),
-        [
-          new nodes.TextNode('Hi', { first_line: 2 }),
-          new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
-        ]),
+      new nodes.IfNode(new nodes.NegatedBooleanExpressionNode(new nodes.BooleanLiteralNode('true')), [
+        new nodes.TextNode('Hi', { first_line: 2 }),
+        new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('5')),
+      ]),
     ];
 
     expect(results).toEqual(expected);
@@ -556,7 +552,9 @@ describe('Parser', () => {
         'testvar',
         new nodes.ArithmeticExpressionExponentNode(
           new nodes.NumericLiteralNode('2'),
-          new nodes.NumericLiteralNode('2'))),
+          new nodes.NumericLiteralNode('2'),
+        ),
+      ),
     ];
 
     expect(results).toEqual(expected);
@@ -585,10 +583,13 @@ describe('Parser', () => {
     // Runner aggregates text and expression value for same line.
     const expected = [
       new nodes.TextNode('Hello there ', { first_line: results[0].lineNum }),
-      new nodes.InlineExpressionNode(new nodes.ArithmeticExpressionExponentNode(
-        new nodes.NumericLiteralNode('2'),
-        new nodes.NumericLiteralNode('2'))
-      , { first_line: results[0].lineNum }),
+      new nodes.InlineExpressionNode(
+        new nodes.ArithmeticExpressionExponentNode(
+          new nodes.NumericLiteralNode('2'),
+          new nodes.NumericLiteralNode('2'),
+        ),
+        { first_line: results[0].lineNum },
+      ),
       new nodes.TextNode(' test.', { first_line: results[0].lineNum }),
     ];
 
@@ -598,9 +599,7 @@ describe('Parser', () => {
   it('can parse a comment on a text node', () => {
     const results = parser.parse('some text// blah #ignore');
 
-    const expected = [
-      new nodes.TextNode('some text', { first_line: results[0].lineNum }),
-    ];
+    const expected = [new nodes.TextNode('some text', { first_line: results[0].lineNum })];
 
     expect(results).toEqual(expected);
   });
@@ -609,11 +608,11 @@ describe('Parser', () => {
     const results = parser.parse('some text#someHashtag#anotherHashtag #lastHashtag // #ignore');
 
     const expected = [
-      new nodes.TextNode(
-        'some text',
-        { first_line: results[0].lineNum },
-        ['someHashtag', 'anotherHashtag', 'lastHashtag'],
-      ),
+      new nodes.TextNode('some text', { first_line: results[0].lineNum }, [
+        'someHashtag',
+        'anotherHashtag',
+        'lastHashtag',
+      ]),
     ];
 
     expect(results).toEqual(expected);
@@ -623,10 +622,9 @@ describe('Parser', () => {
     const results = parser.parse('<<commandtext>>// blah #ignore');
 
     const expected = [
-      new nodes.GenericCommandNode(
-        [new nodes.TextNode('commandtext', { first_line: results[0].lineNum })],
-        { first_line: results[0].lineNum },
-      ),
+      new nodes.GenericCommandNode([new nodes.TextNode('commandtext', { first_line: results[0].lineNum })], {
+        first_line: results[0].lineNum,
+      }),
     ];
 
     expect(results).toEqual(expected);
@@ -647,7 +645,9 @@ describe('Parser', () => {
   });
 
   it('can parse a shortcut option containing a comment', () => {
-    const results = parser.parse('text//alaksjdakj\n-> shortcut1//alaksjdakj\n\tshortcut text1//alaksjdakj\n-> shortcut2//alaksjdakj\n\tshortcut text2//alaksjdakj\n<<set $testvar to 6>>//alaksjdakj\nmore text//alaksjdakj');
+    const results = parser.parse(
+      'text//alaksjdakj\n-> shortcut1//alaksjdakj\n\tshortcut text1//alaksjdakj\n-> shortcut2//alaksjdakj\n\tshortcut text2//alaksjdakj\n<<set $testvar to 6>>//alaksjdakj\nmore text//alaksjdakj',
+    );
 
     const expected = [
       new nodes.TextNode('text', { first_line: 1 }),
@@ -669,7 +669,9 @@ describe('Parser', () => {
   });
 
   it('can parse hashtags on shortcut options', () => {
-    const results = parser.parse('text\n-> shortcut1#hashtag1\n\tshortcut text1\n-> shortcut2<<if true == true>>#hashtag2\n\tshortcut text2\n<<set $testvar to 6>>\nmore text');
+    const results = parser.parse(
+      'text\n-> shortcut1#hashtag1\n\tshortcut text1\n-> shortcut2<<if true == true>>#hashtag2\n\tshortcut text2\n<<set $testvar to 6>>\nmore text',
+    );
 
     const expected = [
       new nodes.TextNode('text', { first_line: 1 }),
@@ -684,10 +686,7 @@ describe('Parser', () => {
         [new nodes.TextNode('shortcut text2', { first_line: 5 })],
         { first_line: 4 },
         ['hashtag2'],
-        new nodes.EqualToExpressionNode(
-          new nodes.BooleanLiteralNode('true'),
-          new nodes.BooleanLiteralNode('true'),
-        ),
+        new nodes.EqualToExpressionNode(new nodes.BooleanLiteralNode('true'), new nodes.BooleanLiteralNode('true')),
       ),
       new nodes.SetVariableEqualToNode('testvar', new nodes.NumericLiteralNode('6')),
       new nodes.TextNode('more text', { first_line: 7 }),
@@ -698,6 +697,8 @@ describe('Parser', () => {
 
   it('should throw an error if parsing invalid input', () => {
     const invalid = '<<al#ksjd #{sdasd}>>';
-    expect(() => { parser.parse(invalid); }).toThrow("Parse error on line 2: Unexpected 'EndInlineExp'");
+    expect(() => {
+      parser.parse(invalid);
+    }).toThrow("Parse error on line 2: Unexpected 'EndInlineExp'");
   });
 });

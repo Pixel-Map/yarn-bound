@@ -1,5 +1,6 @@
-import runner from './runner';
+// @ts-nocheck
 import results from './results';
+import runner from './runner';
 
 runner.OptionsResult = results.OptionsResult;
 runner.TextResult = results.TextResult;

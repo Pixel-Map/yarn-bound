@@ -1,13 +1,14 @@
+// @ts-nocheck
 'use strict';
 
-class Text { }
-class Shortcut { }
-class Conditional { }
-class Assignment { }
-class Literal { }
-class Expression { }
-class FunctionCall { }
-class Command { }
+class Text {}
+class Shortcut {}
+class Conditional {}
+class Assignment {}
+class Literal {}
+class Expression {}
+class FunctionCall {}
+class Command {}
 
 export default {
   types: {
@@ -73,7 +74,6 @@ export default {
     }
   },
 
-
   // /////////////// Command Nodes
   GenericCommandNode: class extends Command {
     constructor(command, lineNo, hashtags = []) {
@@ -99,7 +99,6 @@ export default {
       this.type = 'StopCommandNode';
     }
   },
-
 
   // /////////////// Contents Nodes
   TextNode: class extends Text {

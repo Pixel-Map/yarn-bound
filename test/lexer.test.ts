@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-env jest */
 
 'use strict';
@@ -93,7 +94,9 @@ describe('Lexer', () => {
 
   it('can tokenize nested shortcut options', () => {
     const lexer = new Lexer();
-    lexer.setInput('text\n-> shortcut1\n\tText1\n\t-> nestedshortcut1\n\t\tNestedText1\n\t-> nestedshortcut2\n\t\tNestedText2\n-> shortcut2\n\tText2\nmore text');
+    lexer.setInput(
+      'text\n-> shortcut1\n\tText1\n\t-> nestedshortcut1\n\t\tNestedText1\n\t-> nestedshortcut2\n\t\tNestedText2\n-> shortcut2\n\tText2\nmore text',
+    );
 
     expect(lexer.lex()).toBe('Text');
     expect(lexer.lex()).toBe('EndOfLine');
@@ -434,17 +437,23 @@ describe('Lexer', () => {
     expect(lexer.lex()).toBe('BeginCommand');
     expect(lexer.lex()).toBe('Jump');
     expect(lexer.lex()).toBe('Identifier');
-    expect(() => { lexer.lex(); }).toThrow();
+    expect(() => {
+      lexer.lex();
+    }).toThrow();
   });
 
   it('throws an error if lexer is set to unknown state', () => {
     const lexer = new Lexer();
-    expect(() => { lexer.setState('SomeUnknownState'); }).toThrow();
+    expect(() => {
+      lexer.setState('SomeUnknownState');
+    }).toThrow();
   });
 
   it('throws an error if one attempts to add two text states', () => {
     const lexerState = new LexerState();
     lexerState.addTextRule('Text', 'something');
-    expect(() => { lexerState.addTextRule('Text', 'somethingElse'); }).toThrow();
+    expect(() => {
+      lexerState.addTextRule('Text', 'somethingElse');
+    }).toThrow();
   });
 });
