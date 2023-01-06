@@ -1,5 +1,5 @@
 import YarnBound from './yarn-bound.js'
-import bondage from '@mnbroatch/bondage/src/index.js'
+import bondage from './bondage.js'
 const { OptionsResult, TextResult, CommandResult } = bondage
 
 YarnBound.OptionsResult = OptionsResult

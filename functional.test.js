@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import YarnBound from './src/index'
-import bondage from '@mnbroatch/bondage/src/index'
+import bondage from './src/bondage'
 const { OptionsResult } = bondage
 
 describe('functional test', () => {
@@ -39,6 +39,45 @@ describe('functional test', () => {
     expect(runner.currentResult.text).toBe('I am the line after a choice')
     runner.advance()
     expect(runner.currentResult.text).toBe('I am the line after the choices')
+    expect(runner.currentResult.isDialogueEnd).toBe(true)
+  })
+})
+
+describe('supports indented blocks', () => {
+  const dialogue = `
+    title: Start
+    ---
+    <<declare $favoriteFood = "unknown">>
+    <<if $favoriteFood is "unknown">>
+    Charles: Hi, What is your favorite food?
+    -> Tacos
+      <<set $favoriteFood to "tacos">>
+      Charles: Sweet, I'll remember that!
+    -> Spam
+      <<set $favoriteFood to "spam">>
+      Charles: Interesting... Noting it down.
+    Charles learned that you love [special]{$favoriteFood}[/special]!
+    <<else>>
+      I remember you... You love [special]{$favoriteFood}[/special] right?
+    <<endif>>
+    ===
+  `
+
+  test('should load a dialogue object into the runner', () => {
+    const runner = new YarnBound({ dialogue })
+    expect(runner.currentResult.text).toBe('Hi, What is your favorite food?')
+    runner.advance()
+
+    expect(runner.currentResult.options).toEqual(
+      new OptionsResult([
+        { text: 'Tacos' },
+        { text: 'Spam' },
+      ]).options.map((option) => ({ ...option, markup: [] }))
+    )
+    runner.advance(1)
+    expect(runner.currentResult.text).toBe('Interesting... Noting it down.')
+    runner.advance()
+    expect(runner.currentResult.text).toBe('Charles learned that you love spam!')
     expect(runner.currentResult.isDialogueEnd).toBe(true)
   })
 })
