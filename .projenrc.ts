@@ -4,9 +4,10 @@ const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
   name: 'yarn-bound',
   license: 'mit',
+  copyrightOwner: 'Yarn Community',
   artifactsDirectory: 'dist',
   projenrcTs: true,
-  deps: [],
+  deps: ['@babel/preset-env'],
   entrypoint: 'dist/yarn-bound.js',
   description: 'Quality of life wrapper around bondage.js',
   devDeps: [
@@ -21,7 +22,7 @@ const project = new typescript.TypeScriptProject({
       target: 'ES2022',
       lib: ['ES2022', 'DOM'],
     },
-    include: ['.projenrc.ts'],
+
   },
   package: true,
   gitignore: ['/.idea', '.DS_Store'],
