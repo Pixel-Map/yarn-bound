@@ -15,6 +15,7 @@ function parseCharacterLabel(node) {
   }
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 function parseMarkup(node, locale) {
   const attributes = [];
   let noMarkup = false;

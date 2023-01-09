@@ -22,6 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 /* eslint-enable */
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export default function convertYarnToJS(content) {
   const objects = [];
 

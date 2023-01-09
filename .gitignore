@@ -30,7 +30,7 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-/.idea
+.idea
 .DS_Store
 !/.projenrc.js
 /test-reports/
@@ -47,6 +47,6 @@ junit.xml
 !/tsconfig.json
 !/tsconfig.dev.json
 !/src/
-
+/lib
 /dist/
 !/.eslintrc.json

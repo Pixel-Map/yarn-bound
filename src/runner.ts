@@ -141,6 +141,7 @@ class Runner {
    * @param {Node[]} nodes
    * @param {YarnNode[]} metadata
    */
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   *evalNodes(nodes, metadata) {
     let shortcutNodes = [];
     let textRun = '';

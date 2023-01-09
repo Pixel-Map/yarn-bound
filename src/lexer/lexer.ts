@@ -104,6 +104,7 @@ class Lexer {
     };
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   lexNextTokenOnCurrentLine() {
     const thisIndentation = this.getCurrentLineIndentation();
 
@@ -160,10 +161,8 @@ class Lexer {
         if (rule.state) {
           this.setState(rule.state);
 
-          if (this.shouldTrackNextIndentation) {
-            if (this.getLastRecordedIndentation()[0] < thisIndentation) {
-              this.indentation.push([thisIndentation, false]);
-            }
+          if (this.shouldTrackNextIndentation && this.getLastRecordedIndentation()[0] < thisIndentation) {
+            this.indentation.push([thisIndentation, false]);
           }
         }
 

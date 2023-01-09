@@ -1,4 +1,5 @@
 // @ts-nocheck
+// eslint-disable-next-line @typescript-eslint/no-shadow
 var o = function (k, v, o, l) {
     for (o = o || {}, l = k.length; l--; o[k[l]] = v);
     return o;
@@ -290,6 +291,7 @@ var parser = {
     /* this == yyval */
 
     var $0 = $$.length - 1;
+    // eslint-disable-next-line sonarjs/max-switch-cases
     switch (yystate) {
       case 1:
         return $$[$0 - 1].flat();
@@ -1547,6 +1549,7 @@ var parser = {
       throw error;
     }
   },
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   parse: function parse(input) {
     var self = this,
       stack = [0],

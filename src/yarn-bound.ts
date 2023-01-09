@@ -43,6 +43,7 @@ export default class YarnBound {
     this.advance();
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity
   advance (optionIndex) {
     if (
       typeof optionIndex !== 'undefined' &&

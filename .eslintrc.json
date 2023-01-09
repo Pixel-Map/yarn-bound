@@ -222,7 +222,8 @@
           "method"
         ]
       }
-    ]
+    ],
+    "sonarjs/no-duplicate-string": "off"
   },
   "overrides": [
     {

@@ -1086,12 +1086,7 @@ describe('Dialogue', () => {
   it('Evaluates a function and uses it in a conditional', () => {
     runner.registerFunction('testfunc', (arg1, arg2) => {
       if (arg1 === 'firstarg') {
-        if (arg2 === 'secondarg') {
-          // Test returning true
-          return true;
-        }
-        // Test returning false
-        return false;
+        return arg2 === 'secondarg';
       }
 
       throw new Error(`Args ${[arg1, arg2]} were not expected in testfunc`);
@@ -1549,12 +1544,7 @@ describe('Dialogue', () => {
   it('Can handle inline expression containing function call', () => {
     runner.registerFunction('testfunc', (arg1, arg2) => {
       if (arg1 === 'frank') {
-        if (arg2 === 2) {
-          // Test returning true
-          return true;
-        }
-        // Test returning false
-        return false;
+        return arg2 === 2;
       }
 
       throw new Error(`Args ${[arg1, arg2]} were not expected in testfunc`);

@@ -22,13 +22,14 @@ const project = new typescript.TypeScriptProject({
       target: 'ES2022',
       lib: ['ES2022', 'DOM'],
     },
-
   },
   package: true,
-  gitignore: ['/.idea', '.DS_Store'],
+  gitignore: ['.idea', '.DS_Store'],
 });
 
 project.eslint?.addExtends('plugin:sonarjs/recommended');
+// @ts-ignore
+project.eslint?.addRules({ 'sonarjs/no-duplicate-string': 'off' });
 
 project.github!.tryFindWorkflow('release')!.file!.addOverride('jobs.release_github.steps', [
   { uses: 'actions/setup-node@v3', with: { 'node-version': '14.x' } },
