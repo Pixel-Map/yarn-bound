@@ -1,4 +1,3 @@
-// @ts-nocheck
 import results from './results';
 import runner from './runner';
 

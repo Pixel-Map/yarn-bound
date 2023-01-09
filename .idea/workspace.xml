@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb756fc3-29db-4d73-b9b5-6b7509118b9c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/results.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/results.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bondage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bondage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +17,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -43,7 +47,7 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/ken/Documents/yarn-bound/node_modules/prettier",
     "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Users/ken/Documents/yarn-bound/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/kendog/Documents/yarn-bound/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -63,6 +67,7 @@
       <workItem from="1673040769508" duration="1386000" />
       <workItem from="1673042329556" duration="1163000" />
       <workItem from="1673242384119" duration="1173000" />
+      <workItem from="1673285798264" duration="432000" />
     </task>
     <servers />
   </component>
