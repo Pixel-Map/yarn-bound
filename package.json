@@ -48,7 +48,7 @@
     "@babel/preset-env": "^7.20.2"
   },
   "main": "dist/yarn-bound.js",
-  "license": "mit",
+  "license": "MIT",
   "version": "0.0.0",
   "jest": {
     "testMatch": [

@@ -3,7 +3,7 @@ import { typescript } from 'projen';
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
   name: 'yarn-bound',
-  license: 'mit',
+  license: 'MIT',
   copyrightOwner: 'Yarn Community',
   projenrcTs: true,
   deps: ['@babel/preset-env'],
