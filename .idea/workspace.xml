@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="eb756fc3-29db-4d73-b9b5-6b7509118b9c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/runner.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/runner.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/results.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/results.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +33,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/kendog/Documents/yarn-bound",
+    "last_opened_file_path": "/Users/ken/Documents/yarn-bound",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -40,9 +41,9 @@
     "node.js.selected.package.standard": "/Users/kendog/Documents/yarn-bound/node_modules/standard",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/kendog/Documents/yarn-bound/node_modules/prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "/Users/kendog/Documents/yarn-bound/node_modules/typescript/lib",
+    "prettierjs.PrettierConfiguration.Package": "/Users/ken/Documents/yarn-bound/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "/Users/ken/Documents/yarn-bound/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -61,6 +62,7 @@
       <updated>1673040768366</updated>
       <workItem from="1673040769508" duration="1386000" />
       <workItem from="1673042329556" duration="1163000" />
+      <workItem from="1673242384119" duration="1173000" />
     </task>
     <servers />
   </component>

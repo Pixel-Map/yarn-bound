@@ -331,6 +331,7 @@ class Runner {
         return a && b;
       },
       BooleanXorExpressionNode: (a, b) => {
+        // eslint-disable-next-line no-bitwise
         return !!(a ^ b);
       }, // eslint-disable-line no-bitwise
       EqualToExpressionNode: (a, b) => {

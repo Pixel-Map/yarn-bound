@@ -1,16 +1,17 @@
-// @ts-nocheck
-'use strict';
-
 class Result {}
 
 class TextResult extends Result {
   /**
    * Create a text display result
-   * @param {string} [text] text to be displayed
-   * @param {string[]} [hashtags] the hashtags for the line
-   * @param {object} [metadata] the parent yarn data
+   * @param text text to be displayed
+   * @param hashtags the hashtags for the line
+   * @param metadata the parent yarn data
    */
-  constructor(text, hashtags, metadata) {
+  public text: string;
+  public hashtags: string[];
+  public metadata: Metadata;
+
+  constructor(text: string, hashtags: string[], metadata: Metadata) {
     super();
     this.text = text;
     this.hashtags = hashtags;
@@ -21,11 +22,15 @@ class TextResult extends Result {
 class CommandResult extends Result {
   /**
    * Return a command string
-   * @param {string} [command] the command text
-   * @param {string[]} [hashtags] the hashtags for the line
-   * @param {object} [metadata] the parent yarn data
+   * @param command the command text
+   * @param hashtags the hashtags for the line
+   * @param metadata the parent yarn data
    */
-  constructor(command, hashtags, metadata) {
+  public command: string;
+  public hashtags: string[];
+  public metadata: Metadata;
+
+  constructor(command: string, hashtags: string[], metadata: Metadata) {
     super();
     this.command = command;
     this.hashtags = hashtags;
@@ -36,12 +41,17 @@ class CommandResult extends Result {
 class OptionResult extends Result {
   /**
    * Strip down Conditional option for presentation
-   * @param {string} [text] option text to display
-   * @param {boolean} [isAvailable] whether option is available
-   * @param {string[]} [hashtags] the hashtags for the line
+   * @param text option text to display
+   * @param isAvailable whether option is available
+   * @param hashtags the hashtags for the line
    * @param {object} [metadata] the parent yarn data
    */
-  constructor(text, isAvailable = true, hashtags = [], metadata) {
+  public text: string;
+  public isAvailable: boolean;
+  public hashtags: string[];
+  public metadata: Metadata;
+
+  constructor(text: string, isAvailable = true, hashtags: string[] = [], metadata: Metadata) {
     super();
     this.text = text;
     this.isAvailable = isAvailable;
@@ -56,9 +66,14 @@ class OptionsResult extends Result {
    * @param {Node[]} [options] list of the text of options to be shown
    * @param {object} [metadata] the parent yarn data
    */
-  constructor(options, metadata) {
+  public options: OptionResult[];
+  public metadata: Metadata;
+  public selected: number | undefined;
+
+  constructor(options: Option[], metadata: Metadata) {
     super();
     this.options = options.map((s) => {
+      // @ts-ignore
       return new OptionResult(s.text, s.isAvailable, s.hashtags);
     });
     this.metadata = metadata;
@@ -72,4 +87,19 @@ class OptionsResult extends Result {
   }
 }
 
+export interface Metadata {
+  title: string;
+  filetags: string[];
+}
+
+export interface Option {
+  text: string;
+  isAvailable: boolean;
+  hashtags: string[];
+}
+
+export interface Markups {
+  name: string;
+  properties: Record<string, any>;
+}
 export default { Result, TextResult, CommandResult, OptionsResult };
