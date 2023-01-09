@@ -2,7 +2,7 @@ import { typescript } from 'projen';
 
 const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
-  name: 'yarn-bound',
+  name: 'yarn-bound-v2',
   license: 'MIT',
   copyrightOwner: 'Yarn Community',
   projenrcTs: true,
