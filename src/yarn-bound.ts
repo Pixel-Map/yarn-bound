@@ -3,7 +3,7 @@ import bondage from './bondage';
 import parseLine from './line-parser';
 
 export default class YarnBound {
-  constructor ({
+  constructor({
     dialogue,
     variableStorage,
     functions,
@@ -37,19 +37,15 @@ export default class YarnBound {
     this.jump(startAt);
   }
 
-  jump (startAt) {
+  jump(startAt) {
     this.generator = this.runner.run(startAt);
     this.bufferedNode = null;
     this.advance();
   }
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
-  advance (optionIndex) {
-    if (
-      typeof optionIndex !== 'undefined' &&
-        this.currentResult &&
-        this.currentResult.select
-    ) {
+  advance(optionIndex: number) {
+    if (typeof optionIndex !== 'undefined' && this.currentResult && this.currentResult.select) {
       this.currentResult.select(optionIndex);
     }
 
@@ -73,7 +69,7 @@ export default class YarnBound {
       if (
         next instanceof bondage.TextResult &&
         this.combineTextAndOptionsResults &&
-          buffered instanceof bondage.OptionsResult
+        buffered instanceof bondage.OptionsResult
       ) {
         next = Object.assign(buffered, next);
         buffered = null;
@@ -101,7 +97,7 @@ export default class YarnBound {
     this.bufferedNode = buffered;
   }
 
-  registerFunction (name, func) {
+  registerFunction(name: string, func) {
     this.runner.registerFunction(name, func);
   }
 }

@@ -8,10 +8,10 @@ import results from './results';
 const nodeTypes = types.types;
 
 class Runner {
-  private noEscape: boolean;
-  private yarnNodes: {};
+  private readonly noEscape: boolean;
+  private readonly yarnNodes: {};
   private variables: DefaultVariableStorage;
-  private functions: {};
+  private readonly functions: {};
   constructor() {
     this.noEscape = false;
     this.yarnNodes = {};
@@ -27,8 +27,9 @@ class Runner {
     if (!dialogue) {
       throw new Error('No dialogue supplied');
     }
-    let nodes;
+    let nodes: Array<{ title: string; body: string }>;
     if (typeof dialogue === 'string') {
+      // @ts-ignore
       nodes = convertYarn(dialogue);
     } else {
       nodes = dialogue;
