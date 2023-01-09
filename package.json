@@ -1,5 +1,5 @@
 {
-  "name": "yarn-bound-v2",
+  "name": "yarn-bound-ts",
   "description": "Quality of life wrapper around bondage.js",
   "scripts": {
     "build": "npx projen build",
