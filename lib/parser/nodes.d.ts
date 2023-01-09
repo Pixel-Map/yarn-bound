@@ -68,37 +68,68 @@ declare const _default: {
         new (variableName: any): {};
     };
     UnaryMinusExpressionNode: {
-        new (expression: any): {};
+        new (expression: Expression): {
+            readonly expression: Expression;
+        };
     };
     ArithmeticExpressionAddNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     ArithmeticExpressionMinusNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     ArithmeticExpressionMultiplyNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     ArithmeticExpressionExponentNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     ArithmeticExpressionDivideNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     ArithmeticExpressionModuloNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     NegatedBooleanExpressionNode: {
-        new (expression: any): {};
+        new (expression: Expression): {
+            readonly expression: Expression;
+        };
     };
     BooleanOrExpressionNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     BooleanAndExpressionNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     BooleanXorExpressionNode: {
-        new (expression1: any, expression2: any): {};
+        new (expression1: Expression, expression2: Expression): {
+            readonly expression1: Expression;
+            readonly expression2: Expression;
+        };
     };
     EqualToExpressionNode: {
         new (expression1: any, expression2: any): {};

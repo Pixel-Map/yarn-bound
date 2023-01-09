@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb756fc3-29db-4d73-b9b5-6b7509118b9c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bondage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/bondage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runner.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/runner.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/parser/nodes.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/parser/nodes.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/parser/nodes.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/parser/nodes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/nodes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/nodes.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +46,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/ken/Documents/yarn-bound/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "settings.editor.selected.configurable": "inlay.hints",
     "ts.external.directory.path": "/Users/kendog/Documents/yarn-bound/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -67,7 +67,7 @@
       <workItem from="1673040769508" duration="1386000" />
       <workItem from="1673042329556" duration="1163000" />
       <workItem from="1673242384119" duration="1173000" />
-      <workItem from="1673285798264" duration="432000" />
+      <workItem from="1673285798264" duration="3220000" />
     </task>
     <servers />
   </component>

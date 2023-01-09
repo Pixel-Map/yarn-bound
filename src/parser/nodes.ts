@@ -156,100 +156,79 @@ export default {
 
   // /////////////// Arithmetic Expression Nodes
   UnaryMinusExpressionNode: class extends Expression {
-    constructor(expression) {
+    constructor(readonly expression: Expression) {
       super();
       this.type = 'UnaryMinusExpressionNode';
-      this.expression = expression;
     }
   },
 
   ArithmeticExpressionAddNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'ArithmeticExpressionAddNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
   ArithmeticExpressionMinusNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'ArithmeticExpressionMinusNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
   ArithmeticExpressionMultiplyNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'ArithmeticExpressionMultiplyNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
   ArithmeticExpressionExponentNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'ArithmeticExpressionExponentNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
   ArithmeticExpressionDivideNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'ArithmeticExpressionDivideNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
   ArithmeticExpressionModuloNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'ArithmeticExpressionModuloNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
   // /////////////// Boolean Expression Nodes
 
   NegatedBooleanExpressionNode: class extends Expression {
-    constructor(expression) {
+    constructor(readonly expression: Expression) {
       super();
       this.type = 'NegatedBooleanExpressionNode';
-      this.expression = expression;
     }
   },
 
   BooleanOrExpressionNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'BooleanOrExpressionNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
   BooleanAndExpressionNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'BooleanAndExpressionNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
-
   BooleanXorExpressionNode: class extends Expression {
-    constructor(expression1, expression2) {
+    constructor(readonly expression1: Expression, readonly expression2: Expression) {
       super();
       this.type = 'BooleanXorExpressionNode';
-      this.expression1 = expression1;
-      this.expression2 = expression2;
     }
   },
 
