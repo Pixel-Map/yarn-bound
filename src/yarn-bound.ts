@@ -4,12 +4,12 @@ import parseLine from './line-parser';
 
 interface props {
   dialogue: string;
-  variableStorage: any;
-  functions: any;
-  handleCommand: any;
-  combineTextAndOptionsResults: any;
-  locale: any;
-  startAt: string;
+  variableStorage?: any;
+  functions?: any;
+  handleCommand?: any;
+  combineTextAndOptionsResults?: any;
+  locale?: any;
+  startAt?: string;
 }
 
 export default class YarnBound {
