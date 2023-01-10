@@ -13,6 +13,9 @@ interface props {
 }
 
 export default class YarnBound {
+  static OptionsResult: typeof bondage.OptionsResult;
+  static TextResult: typeof bondage.TextResult;
+  static CommandResult: typeof bondage.CommandResult;
   public handleCommand: any;
   public combineTextAndOptionsResults: any;
   public bondage: any;
