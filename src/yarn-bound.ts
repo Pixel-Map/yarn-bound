@@ -1,17 +1,37 @@
-// @ts-nocheck
 import bondage from './bondage';
 import parseLine from './line-parser';
 
+
+interface props {
+  dialogue: string;
+  variableStorage: any;
+  functions: any;
+  handleCommand: any;
+  combineTextAndOptionsResults: any;
+  locale: any;
+  startAt: string;
+}
+
 export default class YarnBound {
+  public handleCommand: any;
+  public combineTextAndOptionsResults: any;
+  public bondage: any;
+  public bufferedNode: any;
+  public currentResult: any;
+  public history: any;
+  public locale: any;
+  public runner: any;
+  private generator: any;
+
   constructor({
     dialogue,
     variableStorage,
     functions,
     handleCommand,
     combineTextAndOptionsResults,
-    locale,
+    locale = undefined,
     startAt = 'Start',
-  }) {
+  }: props) {
     this.handleCommand = handleCommand;
     this.combineTextAndOptionsResults = combineTextAndOptionsResults;
     this.bondage = bondage;
@@ -37,14 +57,14 @@ export default class YarnBound {
     this.jump(startAt);
   }
 
-  jump(startAt) {
+  jump(startAt: string) {
     this.generator = this.runner.run(startAt);
     this.bufferedNode = null;
     this.advance();
   }
 
   // eslint-disable-next-line sonarjs/cognitive-complexity
-  advance(optionIndex: number) {
+  advance(optionIndex: undefined | number = undefined) {
     if (typeof optionIndex !== 'undefined' && this.currentResult && this.currentResult.select) {
       this.currentResult.select(optionIndex);
     }
@@ -85,6 +105,7 @@ export default class YarnBound {
     if (next instanceof bondage.TextResult) {
       parseLine(next, this.locale);
     } else if (next instanceof bondage.OptionsResult) {
+      // @ts-ignore
       if (next.text) {
         parseLine(next, this.locale);
       }
@@ -97,7 +118,7 @@ export default class YarnBound {
     this.bufferedNode = buffered;
   }
 
-  registerFunction(name: string, func) {
+  registerFunction(name: string, func: any) {
     this.runner.registerFunction(name, func);
   }
 }

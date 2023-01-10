@@ -7,7 +7,6 @@ const project = new typescript.TypeScriptProject({
   copyrightOwner: 'Yarn Community',
   projenrcTs: true,
   deps: ['@babel/preset-env'],
-  entrypoint: 'dist/yarn-bound.js',
   description: 'Quality of life wrapper around bondage.js',
   devDeps: ['eslint-plugin-prettier', 'esbuild', 'prettier', 'eslint-plugin-sonarjs', 'ts-node'],
   tsconfig: {
