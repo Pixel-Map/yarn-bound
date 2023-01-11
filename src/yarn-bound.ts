@@ -1,6 +1,6 @@
 import bondage from './bondage';
 import parseLine from './line-parser';
-
+import { CommandResult, OptionsResult, TextResult } from './results';
 
 interface props {
   dialogue: string;
@@ -13,9 +13,9 @@ interface props {
 }
 
 export default class YarnBound {
-  static OptionsResult: typeof bondage.OptionsResult;
-  static TextResult: typeof bondage.TextResult;
-  static CommandResult: typeof bondage.CommandResult;
+  static OptionsResult: OptionsResult;
+  static TextResult: TextResult;
+  static CommandResult: CommandResult;
   public handleCommand: any;
   public combineTextAndOptionsResults: any;
   public bondage: any;
