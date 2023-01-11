@@ -1,4 +1,4 @@
-import results from './results';
+import * as results from './results';
 import runner from './runner';
 
 runner.OptionsResult = results.OptionsResult;

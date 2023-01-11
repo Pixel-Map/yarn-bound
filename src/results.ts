@@ -1,6 +1,6 @@
 class Result {}
 
-class TextResult extends Result {
+export class TextResult extends Result {
   /**
    * Create a text display result
    * @param text text to be displayed
@@ -19,7 +19,7 @@ class TextResult extends Result {
   }
 }
 
-class CommandResult extends Result {
+export class CommandResult extends Result {
   /**
    * Return a command string
    * @param command the command text
@@ -38,7 +38,7 @@ class CommandResult extends Result {
   }
 }
 
-class OptionResult extends Result {
+export class OptionResult extends Result {
   /**
    * Strip down Conditional option for presentation
    * @param text option text to display
@@ -60,7 +60,7 @@ class OptionResult extends Result {
   }
 }
 
-class OptionsResult extends Result {
+export class OptionsResult extends Result {
   /**
    * Create a selectable list of options from the given list of text
    * @param {Node[]} [options] list of the text of options to be shown
@@ -102,4 +102,4 @@ export interface Markups {
   name: string;
   properties: Record<string, any>;
 }
-export default { Result, TextResult, CommandResult, OptionsResult };
+

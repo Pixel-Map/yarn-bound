@@ -112,6 +112,7 @@ export default class YarnBound {
       if (next.text) {
         parseLine(next, this.locale);
       }
+      // @ts-ignore
       next.options.forEach((option) => {
         parseLine(option, this.locale);
       });
