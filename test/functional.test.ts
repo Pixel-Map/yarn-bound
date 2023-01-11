@@ -1,9 +1,7 @@
 // @ts-nocheck
 /* eslint-env jest */
 
-import bondage from '../src/bondage';
-import YarnBound from '../src/index';
-const { OptionsResult } = bondage;
+import { YarnBound, OptionsResult } from '../src/index';
 
 describe('functional test', () => {
   const dialogue = `

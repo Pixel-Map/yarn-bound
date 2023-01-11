@@ -8,10 +8,10 @@ export class TextResult extends Result {
    * @param metadata the parent yarn data
    */
   public text: string;
-  public hashtags: string[];
-  public metadata: Metadata;
+  public hashtags: string[] | undefined;
+  public metadata: Metadata | undefined;
 
-  constructor(text: string, hashtags: string[], metadata: Metadata) {
+  constructor(text: string, hashtags?: string[], metadata?: Metadata) {
     super();
     this.text = text;
     this.hashtags = hashtags;

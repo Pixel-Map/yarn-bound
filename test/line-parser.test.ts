@@ -1,10 +1,7 @@
 // @ts-nocheck
-/* eslint-env jest */
-/* eslint-disable no-new */
-
-import YarnBound from '../src/index';
+import { TextResult } from '../src/index';
 import lineParser from '../src/line-parser';
-const TextResult = YarnBound.TextResult;
+
 
 describe('line parser', () => {
   test('should handle a character', () => {
