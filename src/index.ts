@@ -1,5 +1,4 @@
-import bondage from './bondage';
+import { CommandResult, OptionsResult, TextResult } from './results';
 import YarnBound from './yarn-bound';
-const { OptionsResult, TextResult, CommandResult } = bondage;
 
 export { YarnBound, OptionsResult, TextResult, CommandResult };

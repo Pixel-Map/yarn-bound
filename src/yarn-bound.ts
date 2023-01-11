@@ -1,6 +1,6 @@
-import bondage from './bondage';
 import parseLine from './line-parser';
 import { CommandResult, OptionsResult, TextResult } from './results';
+import { Runner } from './runner';
 
 interface props {
   dialogue: string;
@@ -37,12 +37,11 @@ export default class YarnBound {
   }: props) {
     this.handleCommand = handleCommand;
     this.combineTextAndOptionsResults = combineTextAndOptionsResults;
-    this.bondage = bondage;
     this.bufferedNode = null;
     this.currentResult = null;
     this.history = [];
     this.locale = locale;
-    this.runner = new bondage.Runner();
+    this.runner = new Runner();
     this.runner.noEscape = true;
 
     this.runner.load(dialogue);
@@ -78,7 +77,7 @@ export default class YarnBound {
     // We either return the command as normal or, if a handler
     // is supplied, use that and don't bother the consuming app
     if (this.handleCommand) {
-      while (next instanceof bondage.CommandResult) {
+      while (next instanceof CommandResult) {
         this.handleCommand(next);
         next = this.generator.next().value;
       }
@@ -86,13 +85,13 @@ export default class YarnBound {
 
     // Lookahead for combining text + options, and for end of dialogue.
     // Can't look ahead of option nodes (what would you look ahead at?)
-    if (!(next instanceof bondage.OptionsResult)) {
+    if (!(next instanceof OptionsResult)) {
       const upcoming = this.generator.next();
       buffered = upcoming.value;
       if (
-        next instanceof bondage.TextResult &&
+        next instanceof TextResult &&
         this.combineTextAndOptionsResults &&
-        buffered instanceof bondage.OptionsResult
+        buffered instanceof OptionsResult
       ) {
         next = Object.assign(buffered, next);
         buffered = null;
@@ -105,9 +104,9 @@ export default class YarnBound {
       this.history.push(this.currentResult);
     }
 
-    if (next instanceof bondage.TextResult) {
+    if (next instanceof TextResult) {
       parseLine(next, this.locale);
-    } else if (next instanceof bondage.OptionsResult) {
+    } else if (next instanceof OptionsResult) {
       // @ts-ignore
       if (next.text) {
         parseLine(next, this.locale);

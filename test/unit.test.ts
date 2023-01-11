@@ -1,22 +1,21 @@
 // @ts-nocheck
-/* eslint-env jest */
-/* eslint-disable no-new */
 
-import bondage from '../src/bondage';
-import { YarnBound } from '../src/index';
+import { YarnBound, TextResult, CommandResult, OptionsResult } from '../src/index';
+import { Runner } from '../src/runner';
 
-jest.spyOn(bondage.Runner.prototype, 'load').mockImplementation();
-jest.spyOn(bondage.Runner.prototype, 'registerFunction').mockImplementation();
-jest.spyOn(bondage.Runner.prototype, 'setVariableStorage').mockImplementation();
-jest.spyOn(bondage.Runner.prototype, 'run').mockImplementation(function* () {
-  while (true) yield new bondage.TextResult('hello');
+
+jest.spyOn(Runner.prototype, 'load').mockImplementation();
+jest.spyOn(Runner.prototype, 'registerFunction').mockImplementation();
+jest.spyOn(Runner.prototype, 'setVariableStorage').mockImplementation();
+jest.spyOn(Runner.prototype, 'run').mockImplementation(function* () {
+  while (true) yield new TextResult('hello');
 });
 
 describe('constructor', () => {
   const dialogue = [];
   test('should load a dialogue object into the runner', () => {
     new YarnBound({ dialogue });
-    expect(bondage.Runner.prototype.load).toHaveBeenCalledWith(dialogue);
+    expect(Runner.prototype.load).toHaveBeenCalledWith(dialogue);
   });
 
   test('should load a dialogue into the runner', () => {
@@ -28,13 +27,13 @@ describe('constructor', () => {
     `;
 
     new YarnBound({ dialogue: dialogueWithLeadingWhitespace });
-    expect(bondage.Runner.prototype.load).toHaveBeenCalledWith(dialogueWithLeadingWhitespace);
+    expect(Runner.prototype.load).toHaveBeenCalledWith(dialogueWithLeadingWhitespace);
   });
 
   test('should set the variable storage if provided', () => {
     const variableStorage = new Map();
     new YarnBound({ variableStorage });
-    expect(bondage.Runner.prototype.setVariableStorage).toHaveBeenCalledWith(variableStorage);
+    expect(Runner.prototype.setVariableStorage).toHaveBeenCalledWith(variableStorage);
   });
 
   test('should register initially provided functions', () => {
@@ -44,7 +43,7 @@ describe('constructor', () => {
     };
     new YarnBound({ functions });
     Object.entries(functions).forEach(([key, func]) => {
-      expect(bondage.Runner.prototype.registerFunction).toHaveBeenCalledWith(key, func);
+      expect(Runner.prototype.registerFunction).toHaveBeenCalledWith(key, func);
     });
   });
 
@@ -56,24 +55,24 @@ describe('constructor', () => {
     const runner = new YarnBound({});
     Object.entries(functions).forEach(([key, func]) => {
       runner.registerFunction(key, func);
-      expect(bondage.Runner.prototype.registerFunction).toHaveBeenCalledWith(key, func);
+      expect(Runner.prototype.registerFunction).toHaveBeenCalledWith(key, func);
     });
   });
 
   test('should start the generator at the node with the provided "startAt" title', () => {
     const startAt = 'someStartingNode';
     new YarnBound({ startAt });
-    expect(bondage.Runner.prototype.run).toHaveBeenCalledWith(startAt);
+    expect(Runner.prototype.run).toHaveBeenCalledWith(startAt);
   });
 
   test('should start the generator at the "Start" node if startAt is undefined', () => {
     new YarnBound({});
-    expect(bondage.Runner.prototype.run).toHaveBeenCalledWith('Start');
+    expect(Runner.prototype.run).toHaveBeenCalledWith('Start');
   });
 
   test('should attach the generator to the instance', () => {
     const runner = new YarnBound({});
-    expect(runner.generator).toBe(bondage.Runner.prototype.run.mock.results[0].value);
+    expect(runner.generator).toBe(Runner.prototype.run.mock.results[0].value);
   });
 
   test('should advance the generator', () => {
@@ -90,22 +89,22 @@ describe('jump', () => {
     const yarnbound = new YarnBound({});
     yarnbound.jump(jumpTo);
     expect(YarnBound.prototype.advance).toHaveBeenCalled();
-    expect(bondage.Runner.prototype.run).toHaveBeenCalledWith(jumpTo);
+    expect(Runner.prototype.run).toHaveBeenCalledWith(jumpTo);
   });
 });
 
 describe('advance', () => {
   const mockCommandName1 = 'blah';
   const mockCommandName2 = 'bleh';
-  const mockCommandResult1 = new bondage.CommandResult(mockCommandName1);
-  const mockCommandResult2 = new bondage.CommandResult(mockCommandName2);
-  const mockTextResult1 = new bondage.TextResult('marge');
-  const mockTextResult2 = new bondage.TextResult('maggie');
-  const mockTextResult3 = new bondage.TextResult('homer');
-  const mockOptionsResult = new bondage.OptionsResult([{ text: 'bart' }, { text: 'lisa' }]);
+  const mockCommandResult1 = new CommandResult(mockCommandName1);
+  const mockCommandResult2 = new CommandResult(mockCommandName2);
+  const mockTextResult1 = new TextResult('marge');
+  const mockTextResult2 = new TextResult('maggie');
+  const mockTextResult3 = new TextResult('homer');
+  const mockOptionsResult = new OptionsResult([{ text: 'bart' }, { text: 'lisa' }]);
   describe('where next results are a TextResult followed by OptionsResult', () => {
     beforeAll(() => {
-      bondage.Runner.prototype.run.mockImplementation(function* () {
+      Runner.prototype.run.mockImplementation(function* () {
         yield mockTextResult1;
         yield mockOptionsResult;
         yield mockTextResult2;
@@ -128,7 +127,7 @@ describe('advance', () => {
     test('should set currentResult to an Options object with the text attached if combineTextAndOptionsResults is false', () => {
       const runner = new YarnBound({ combineTextAndOptionsResults: true });
       expect(runner.currentResult).toEqual({ ...mockOptionsResult, ...mockTextResult1 });
-      expect(runner.currentResult).toBeInstanceOf(bondage.OptionsResult);
+      expect(runner.currentResult).toBeInstanceOf(OptionsResult);
     });
 
     test('should select the option with the index passed in, if there is one', () => {
@@ -153,7 +152,7 @@ describe('advance', () => {
 
   describe('where next results are CommandResults followed by TextResults', () => {
     beforeAll(() => {
-      bondage.Runner.prototype.run.mockImplementation(function* () {
+      Runner.prototype.run.mockImplementation(function* () {
         yield mockCommandResult1;
         yield mockCommandResult2;
         yield mockTextResult1;
@@ -201,7 +200,7 @@ describe('advance', () => {
 
   describe('when dialogue ends', () => {
     beforeAll(() => {
-      bondage.Runner.prototype.run.mockImplementation(function* () {
+      Runner.prototype.run.mockImplementation(function* () {
         yield mockTextResult1;
       });
     });

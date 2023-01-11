@@ -7,7 +7,7 @@ import * as results from './results';
 
 const nodeTypes = types.types;
 
-class Runner {
+export class Runner {
   private readonly noEscape: boolean;
   private readonly yarnNodes: {};
   private variables: DefaultVariableStorage;
@@ -398,9 +398,3 @@ class Runner {
   }
 }
 
-export default {
-  Runner,
-  TextResult: results.TextResult,
-  CommandResult: results.CommandResult,
-  OptionsResult: results.OptionsResult,
-};
