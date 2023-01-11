@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 import convertYarn from './convert-yarn-to-js';
 import DefaultVariableStorage from './default-variable-storage';
 import types from './parser/nodes';
@@ -107,7 +108,7 @@ export class Runner {
     });
   }
 
-  registerFunction(name, func) {
+  registerFunction(name: string, func) {
     if (typeof func !== 'function') {
       throw new Error('Registered function must be...well...a function');
     }
@@ -306,80 +307,80 @@ export class Runner {
     }
 
     const nodeHandlers = {
-      UnaryMinusExpressionNode: (a) => {
+      UnaryMinusExpressionNode: (a: number) => {
         return -a;
       },
-      ArithmeticExpressionAddNode: (a, b) => {
+      ArithmeticExpressionAddNode: (a: any, b: any) => {
         return a + b;
       },
-      ArithmeticExpressionMinusNode: (a, b) => {
+      ArithmeticExpressionMinusNode: (a: number, b: number) => {
         return a - b;
       },
-      ArithmeticExpressionExponentNode: (a, b) => {
+      ArithmeticExpressionExponentNode: (a: number, b: number) => {
         return a ** b;
       },
-      ArithmeticExpressionMultiplyNode: (a, b) => {
+      ArithmeticExpressionMultiplyNode: (a: number, b: number) => {
         return a * b;
       },
-      ArithmeticExpressionDivideNode: (a, b) => {
+      ArithmeticExpressionDivideNode: (a: number, b: number) => {
         return a / b;
       },
-      ArithmeticExpressionModuloNode: (a, b) => {
+      ArithmeticExpressionModuloNode: (a: number, b: number) => {
         return a % b;
       },
-      NegatedBooleanExpressionNode: (a) => {
+      NegatedBooleanExpressionNode: (a: any) => {
         return !a;
       },
-      BooleanOrExpressionNode: (a, b) => {
+      BooleanOrExpressionNode: (a: any, b: any) => {
         return a || b;
       },
-      BooleanAndExpressionNode: (a, b) => {
+      BooleanAndExpressionNode: (a: any, b: any) => {
         return a && b;
       },
-      BooleanXorExpressionNode: (a, b) => {
+      BooleanXorExpressionNode: (a: number, b: number) => {
         // eslint-disable-next-line no-bitwise
         return !!(a ^ b);
       }, // eslint-disable-line no-bitwise
-      EqualToExpressionNode: (a, b) => {
+      EqualToExpressionNode: (a: any, b: any) => {
         return a === b;
       },
-      NotEqualToExpressionNode: (a, b) => {
+      NotEqualToExpressionNode: (a: any, b: any) => {
         return a !== b;
       },
-      GreaterThanExpressionNode: (a, b) => {
+      GreaterThanExpressionNode: (a: number, b: number) => {
         return a > b;
       },
-      GreaterThanOrEqualToExpressionNode: (a, b) => {
+      GreaterThanOrEqualToExpressionNode: (a: number, b: number) => {
         return a >= b;
       },
-      LessThanExpressionNode: (a, b) => {
+      LessThanExpressionNode: (a: number, b: number) => {
         return a < b;
       },
-      LessThanOrEqualToExpressionNode: (a, b) => {
+      LessThanOrEqualToExpressionNode: (a: number, b: number) => {
         return a <= b;
       },
-      TextNode: (a) => {
+      TextNode: (a: { text: any }) => {
         return a.text;
       },
-      EscapedCharacterNode: (a) => {
+      EscapedCharacterNode: (a: { text: string | any[] }) => {
         return this.noEscape ? a.text : a.text.slice(1);
       },
-      NumericLiteralNode: (a) => {
+      NumericLiteralNode: (a: { numericLiteral: string }) => {
         return parseFloat(a.numericLiteral);
       },
-      StringLiteralNode: (a) => {
+      StringLiteralNode: (a: { stringLiteral: any }) => {
         return `${a.stringLiteral}`;
       },
-      BooleanLiteralNode: (a) => {
+      BooleanLiteralNode: (a: { booleanLiteral: string }) => {
         return a.booleanLiteral === 'true';
       },
-      VariableNode: (a) => {
+      VariableNode: (a: { variableName: any }) => {
         return this.variables.get(a.variableName);
       },
-      FunctionCallNode: (a) => {
+      FunctionCallNode: (a: any) => {
         return this.evaluateFunctionCall(a);
       },
-      InlineExpressionNode: (a) => {
+      InlineExpressionNode: (a: any) => {
         return a;
       },
     };
@@ -397,4 +398,3 @@ export class Runner {
     );
   }
 }
-

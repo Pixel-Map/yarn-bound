@@ -18,7 +18,6 @@ export default class YarnBound {
   static CommandResult: CommandResult;
   public handleCommand: any;
   public combineTextAndOptionsResults: any;
-  public bondage: any;
   public bufferedNode: any;
   public currentResult: any;
   public history: any;
